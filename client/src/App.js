@@ -1,36 +1,46 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 
-import Navbar from './components/Navbar';
+import AppNavbar from './components/AppNavbar';
+import { Provider } from 'react-redux';
+import store from './store';
+import { loadUser } from './actions/authActions';
 
-import ReleaseContextProvider from './contexts/ReleaseContext';
-import { RecordCrateProvider } from './contexts/RecordCrateState';
-import ReleaseList from './components/ReleaseList';
-import CrateList from './components/CrateList';
+import { GlobalProvider } from './contexts/GlobalState';
 
-import NewReleaseForm from './components/NewReleaseForm';
-import NewCrateItemForm from './components/NewCrateItemForm';
-import SearchReleaseForm from './components/SearchReleasesForm';
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import './App.css';
+
 
 function App() {
 
+  useEffect(() => {
+    console.log ("Main App, useEffect called");
+		const fetchUser = async () => {
+      await store.dispatch(loadUser());
+    }
+    fetchUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <div className="App">
-      <RecordCrateProvider>
-      <ReleaseContextProvider>
-        <Navbar />
-        <ReleaseList />
-        <SearchReleaseForm/>
-        <NewReleaseForm />
-        <CrateList />
-        <NewCrateItemForm />
-      </ReleaseContextProvider>
-      </RecordCrateProvider>
-    </div>
+    <Provider store={store}>
+    <AppNavbar />
+
+    <GlobalProvider>
+      <div className="container">
+      {/* <FilmList /> */}
+      </div>
+      {/* <Header />
+      <div className="container">
+        <Balance />
+        <IncomeExpenses />
+        <TransactionList />
+        <AddTransaction />
+      </div> */}
+    </GlobalProvider>
+      </Provider>
   );
 }
 
 export default App;
-
-

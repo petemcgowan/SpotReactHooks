@@ -34,15 +34,17 @@ db.authenticate()
 // app.set('view engine', 'handlebars');
 
 const recordCrates = require('./routes/recordCrates');
+const users = require('./routes/users');
+const auth = require('./routes/auth');
 
 
 if(process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-
-
 app.use('/recordCrates', recordCrates);
+app.use('/users', users);
+app.use('/auth', auth);
 
 if(process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));

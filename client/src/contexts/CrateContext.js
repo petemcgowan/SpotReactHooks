@@ -8,12 +8,12 @@ export const CrateContext = createContext();
 const CrateContextProvider = (props) => {
 
   const [crateItems, dispatchCrate] = useReducer(CrateReducer, [], () => {
-    const localData = localStorage.getItem('crateItems');
+    const localData = localStorage.getItem('NLRcrateItems');
     return localData ? JSON.parse(localData) : [];
   });
 
   useEffect(() => {
-    localStorage.setItem('crateItems', JSON.stringify(crateItems));
+    localStorage.setItem('NLRcrateItems', JSON.stringify(crateItems));
   }, [crateItems]);
   return (
     <CrateContext.Provider value={{ crateItems, dispatchCrate }}>
