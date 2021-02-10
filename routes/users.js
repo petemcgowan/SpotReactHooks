@@ -4,10 +4,10 @@ const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 
-const db = require('../config/database');
+// const db = require('../config/database');
 const User = require('../models/User');
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
+// const Sequelize = require('sequelize');
+// const Op = Sequelize.Op;
 
 
 // @route   POST users
@@ -24,7 +24,7 @@ router.post('/', (req, res) => {
   if(!name || !email || !password) {
     console.log ("route, user, fields not valid:" + JSON.stringify(user));
     return res.status(400).json({
-      success: false,
+      // success: false,
       msg: 'Please enter all fields' });
   }
 
@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
         if(user) {
           console.log ("route, user already exists:" + JSON.stringify(user));
           return res.status(400).json({
-            success: false,
+            // success: false,
             msg: 'User already exists'
           })
         };
@@ -64,6 +64,15 @@ router.post('/', (req, res) => {
                       console.log ("router user, err:" + err);
                       throw err;
                     }
+                    // User is successfull created, tell the user
+                    res.json({
+                      token,
+                      user: {
+                        id: user.id,
+                        name: user.name,
+                        email: user.email
+                      }
+                    });
                   }
                 )
               });

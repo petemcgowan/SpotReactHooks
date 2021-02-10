@@ -5,10 +5,9 @@ import { Credentials } from './Credentials';
 import uuid from 'uuid/v4';
 
 const SearchReleaseForm = () => {
-    // 'dispatchReleases' here means addRelease (now in the reducer)
-    const { dispatchReleases} = useContext(ReleaseContext);
-    const { recordCrate } = useContext(RecordCrateContext);
-
+  // 'dispatchReleases' here means addRelease (now in the reducer)
+  const { dispatchReleases} = useContext(ReleaseContext);
+  const { recordCrate } = useContext(RecordCrateContext);
   const [searchTerms, setSearchTerms] = useState('');
   var [token, setToken] = useState('');
 
@@ -24,9 +23,16 @@ const SearchReleaseForm = () => {
       setToken(token);
     }
     console.log ("token value (post):" + token);
-    const searchTerms = 'black%20loops%20year%3A2019-2020';
-    // const searchTerms = UICtrl.inputField().searchTerm;
-    console.log ('searchTerms is:' + searchTerms);
+    // good testing:
+    // const testingSearchTerms = 'black%20loops%20year%3A2019-2020';
+    const searchTermAssumption = '%20year%3A2019-2020';
+    // const testingSearchTerms = 'black%20loops%20year%3A2019-2020';
+    var searchTermField = searchTerms;
+    // e.g. black%20loops
+    //const searchTermField = UICtrl.inputField().searchTerms;
+
+    encodeURIComponent(searchTermField);
+    searchTermField += searchTermAssumption;
     // get the list of releases
     var releasesTrackLevel = [];
     if (token !== '' && token !== undefined) {

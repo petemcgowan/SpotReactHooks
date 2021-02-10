@@ -15,8 +15,8 @@ const User = require('../models/User');
 router.get('/user', auth, (req, res) => {
   console.log("routes/auth/user, get user called");
   console.log("req.body:" + JSON.stringify(req.body));
-  User.findByPk(req.user.id)
-    .select('-password')
+  User.findByPk(req.user.id, {attributes: ['password']})
+    // .select('-password')
     .then(user => res.json(user));
   console.log("routes/auth, get user, after findById");
 });
