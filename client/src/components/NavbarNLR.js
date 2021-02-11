@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { ReleaseContext } from '../contexts/ReleaseContext';
 
-const Navbar = () => {
+const NavbarNLR = () => {
   const { releases } = useContext(ReleaseContext);
   return (
     <div className="navbar">
@@ -11,4 +11,4 @@ const Navbar = () => {
   );
 }
 
-export default Navbar;
+export default NavbarNLR;

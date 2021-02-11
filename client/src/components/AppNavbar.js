@@ -15,15 +15,15 @@ import LoginModal from './auth/LoginModal';
 import Logout from './auth/Logout';
 
 import { GlobalProvider } from '../contexts/GlobalState';
-// import Navbar from './components/Navbar';
+import NavbarNLR from './NavbarNLR';
 
 import ReleaseContextProvider from '../contexts/ReleaseContext';
 import { RecordCrateProvider } from '../contexts/RecordCrateState';
 import ReleaseList from './ReleaseList';
 import CrateList from './CrateList';
 
-import NewReleaseForm from './NewReleaseForm';
-import NewCrateItemForm from './NewCrateItemForm';
+// import NewReleaseForm from './NewReleaseForm';
+// import NewCrateItemForm from './NewCrateItemForm';
 import SearchReleaseForm from './SearchReleasesForm';
 
 class AppNavbar extends Component {
@@ -49,12 +49,12 @@ class AppNavbar extends Component {
         <GlobalProvider>
         <RecordCrateProvider>
         <ReleaseContextProvider>
-          {/* <Navbar /> */}
+          <NavbarNLR />
           <ReleaseList />
           <SearchReleaseForm/>
-          <NewReleaseForm />
+          {/* <NewReleaseForm /> */}
           <CrateList />
-          <NewCrateItemForm />
+          {/* <NewCrateItemForm /> */}
         </ReleaseContextProvider>
         </RecordCrateProvider>
         </GlobalProvider>
