@@ -9,7 +9,7 @@ import { loadUser } from './actions/authActions';
 import { GlobalProvider } from './contexts/GlobalState';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import './App.css';
+import './App.css';
 
 
 function App() {

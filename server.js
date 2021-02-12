@@ -1,26 +1,14 @@
 const path = require('path');
 const express = require('express');
-// const exphbs = require('express-handlebars');
 const dotenv = require('dotenv');
-const morgan = require('morgan');
 const colors = require('colors');
-const cors = require('cors');
-const Sequelize = require ('sequelize');
+const morgan = require('morgan');
+// const cors = require('cors');
+// const Sequelize = require ('sequelize');
 
 const db = require('./config/database');
 
-
-const app = express();
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-
-const sequelize = ("postgres://postgres:123456@localhost/newlabelreleases",
-  {
-    dialect: 'postgres',
-  }
-);
+dotenv.config({ path: './config/config.env' });
 
 const eraseDatabaseOnSync = true;
 db.authenticate()
@@ -29,18 +17,24 @@ db.authenticate()
   .catch(err => console.log('Error: ' + err))
 
 
-  // Handlebars
-// app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
-// app.set('view engine', 'handlebars');
-
 const recordCrates = require('./routes/recordCrates');
 const users = require('./routes/users');
 const auth = require('./routes/auth');
 
+const app = express();
+// app.use(cors());
+app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
 
 if(process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+
+// const sequelize = ("postgres://postgres:123456@localhost/newlabelreleases",
+//   {
+//     dialect: 'postgres',
+//   }
+// );
 
 app.use('/recordCrates', recordCrates);
 app.use('/users', users);
